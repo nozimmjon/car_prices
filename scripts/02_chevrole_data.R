@@ -51,8 +51,6 @@ chevrole_cars <- car_data %>%
   filter(n() >= 400) %>%
   ungroup()
 
-
------
   # Analyze missing fuel type data by model
   chevrole_fuel_analysis <- chevrole_cars %>%
     group_by(model) %>%

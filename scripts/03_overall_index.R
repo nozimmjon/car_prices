@@ -73,3 +73,13 @@ overall_index <- bind_rows(model_indices, .id = "model") %>%
   group_by(date) %>%
   summarise(overall_index = weighted.mean(index, weight, na.rm = TRUE)) %>%
   ungroup()
+
+
+# Calculate overall price change
+first_index <- overall_index$overall_index[1]
+last_index <- overall_index$overall_index[nrow(overall_index)]
+overall_change <- (last_index / first_index - 1) * 100
+
+# Calculate growth rates
+overall_index <- overall_index %>%
+  mutate(growth_rate = (overall_index / lag(overall_index) - 1) * 100)

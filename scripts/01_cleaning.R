@@ -85,7 +85,6 @@ improved_car_data <- car_data %>%
                                 ~extract_mileage(..1, ..2, ..3))
   )
 
-
 # Update the car_data with the improved mileage
 car_data <- improved_car_data %>%
   mutate(mileage = coalesce(mileage, improved_mileage))
