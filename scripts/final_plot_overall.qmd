@@ -53,27 +53,24 @@ overall_growth <- ggplot(overall_index, aes(x = date, y = overall_index)) +
            xmin = as.Date("2023-07-01"), xmax = as.Date("2024-07-01"),
            ymin = -Inf, ymax = Inf,
            alpha = 0.1, fill = "red") + 
-  annotate("text", 
+  
+  annotate(geom = "text", 
            x = as.Date("2024-07-01"), y = 90,
            label = "Кетма-кет 12 ой пасайишдан сўнг\n нархлар кўтарилишни бошлаган",
            color = "darkblue", 
            fontface = "bold",
-           size = 4
-           ) +
-  # Bottom curve pointing to the intersection at (2024-07-01)
-   annotate("curve",
+           size = 4) +
+  annotate("curve",
             x = as.Date("2024-07-10"), y = 88.5,
             xend = as.Date("2024-07-01"), yend =81.18661,
             curvature = -0.4, color="black",
             arrow = arrow(
               type = "closed",
-              length = unit(10, "pt"))) +
-  labs(title = "Маҳаллий автомобиллар нарх индекси",
-       #subtitle = "Иккиламчи бозорда Chevrole автомобиллари нархларининг ўзгариши,
-       caption = "Манба:Иқтисодий тадқиқотлар ва ислоҳотлар маркази томонидан очиқ сайтларда берилган эълонлар асосида ҳисобланган.",
+              length = unit(10, "pt")))+
+labs(title = "Маҳаллий автомобиллар нарх индекси",
+        caption = "Манба: Иқтисодий тадқиқотлар ва ислоҳотлар марказиn\ томонидан очиқ сайтларда берилган эълонлар асосида ҳисобланган.",
        x = NULL,
-       y = NULL
-       )+
+       y = NULL ) +
   scale_x_date(
     date_breaks = "1 months",
     # date_labels = "%b '%y", 
@@ -105,8 +102,8 @@ overall_growth <- ggplot(overall_index, aes(x = date, y = overall_index)) +
 #edf3f6
 
 theme_update(
-  panel.background = element_rect(fill = "#f6f7f1", color = "#f6f7f1"), 
-  plot.background = element_rect(fill = "#f6f7f1", color = "#f6f7f1"),
+  panel.background = element_rect(fill = "#f1f6f4", color = "#f1f6f4"), 
+  plot.background = element_rect(fill = "#f1f6f4", color = "#f1f6f4"),
   plot.margin = margin(.8, 1, .7, .8, "cm"),
   plot.title = element_text(
     size = 20,
@@ -139,7 +136,8 @@ monthly_growth <- ggplot(overall_index,
                 )+
   scale_fill_manual(values = c("TRUE" = "skyblue", "FALSE" = "lightcoral")) +
   theme(legend.position = "none") +
-  labs(title = "Автомобиллар ўртача нархининг Ойлик ўсиш суръати",
+  labs(title = "Автомобиллар нархининг ўзгариши",
+       subtitle = "Ойлик ўсиш суръати, %да",
        x = NULL,
        y = NULL) +
   scale_x_date(
