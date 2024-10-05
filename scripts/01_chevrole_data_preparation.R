@@ -38,9 +38,7 @@ chevrole_cars <- car_data %>%
     date = as.Date(date),
     month = factor(month(date), levels = 1:12, labels = month.abb)
   ) %>%
-  # Remove rows with NA in critical columns
-  #filter(!is.na(price), !is.na(year_production), !is.na(mileage)) %>%
-  # Filter out old production years (assuming we want cars from 2000 onwards)
+# Filter out old production years (assuming we want cars from 2000 onwards)
   filter(year_production >= 2000) %>%
   # Remove outliers in price for each model
   group_by(model) %>%
@@ -97,9 +95,9 @@ chevrole_cars <- car_data %>%
                                   is_petrol_imputed)
     )
   
-  # Update the chevrole_cars dataset with imputed values
+# Update the chevrole_cars dataset with imputed values
   chevrole_cars <- chevrole_cars_imputed %>%
-    mutate(is_petrol = is_petrol_imputed) %>%
+    mutate(is_petrol = as.factor(is_petrol_imputed)) %>%
     select(-is_petrol_imputed)
   
   # List of models to exclude
@@ -107,18 +105,25 @@ chevrole_cars <- car_data %>%
   
   # Filter out the specified models
   chevrole_cars <- chevrole_cars %>%
-    filter(!model %in% models_to_exclude)
+    filter(!model %in% models_to_exclude) %>% 
+    select(-c(original_model, region, combustion, type, color, description, 
+           mileage_original, position, power_com, improved_mileage)
+           ) 
+    
+  chevrole_cars <- chevrole_cars %>%
+    distinct()
 
-  
-  write_xlsx(chevrole_cars, "chevrole_cars.xlsx")
-
+# write_xlsx(chevrole_cars, "chevrole_cars.xlsx")
 
 summary_stats <- chevrole_cars %>%
   group_by(model, date) %>%
   summarise(
     count = n(),
     avg_price = mean(price, na.rm = TRUE),
+    median_price = median(price, na.rm = TRUE),
     min_year = min(year_production, na.rm = TRUE),
     max_year = max(year_production, na.rm = TRUE)
   ) %>%
   arrange(desc(count))
+
+

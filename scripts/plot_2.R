@@ -133,5 +133,3 @@ ggsave(
   units = "in",
   dpi = 300
 )
-
-print("Improved diverging chart of model price changes saved.")
