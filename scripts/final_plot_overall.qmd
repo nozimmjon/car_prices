@@ -8,11 +8,11 @@ editor: visual
 theme_set(theme_classic(base_size = 16, base_family = "Roboto Slab"))
 
 
-#f6f7f1
-#f1f6f4
-#f3f4f5
-#DBE0E1
-#FBF5F0
+"#f6f7f1"
+"#f1f6f4"
+"#f3f4f5"
+"#DBE0E1"
+"#FBF5F0"
 
 
 theme_update(
@@ -99,7 +99,7 @@ labs(title = "Маҳаллий автомобиллар нарх индекси"
 
 ```{r}
 
-#edf3f6
+"#edf3f6"
 
 theme_update(
   panel.background = element_rect(fill = "#f1f6f4", color = "#f1f6f4"), 
